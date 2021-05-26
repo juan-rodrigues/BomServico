@@ -1,39 +1,21 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servelet;
 
 import dal.DalAnuncio;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Anuncio;
 
-@WebServlet(name = "TelaGerenciarAnuncio", urlPatterns = {"/TelaGerenciarAnuncio"})
-public class TelaGerenciarAnuncio extends HttpServlet {
-    
-    public String buscaAnuncio(String filtro) {
-        String res = "";
-        ArrayList<Anuncio> anuncios = new DalAnuncio().getAnuncioList(filtro);
-        for (Anuncio anun : anuncios) {
-            res += String.format("<tr>"
-                    + "<td>%s</td>"
-                    + "<td>%s</td>"
-                    + "<td>%s</td>"
-                    + "<td>%s</td>"
-                    + "<td class='text-center'>"
-                    + "<button type='button' onclick='ApagaAnuncio(\"apagar\",%s)' class='btn btn-danger btn-xs'>"
-                    + "<span class='glyphicon glyphicon-remove'></span>"
-                    + " Del</button></td>"
-                    + "</tr>", "" + anun.getId(), anun.getTitulo(),anun.getUsu().getNome(),anun.getCat().getDescricao(), "" + anun.getId(), "" + anun.getId());
-
-        }
-
-        return res;
-    }
+@WebServlet(name = "TelaAnuncio", urlPatterns = {"/TelaAnuncio"})
+public class TelaAnuncio extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,22 +24,17 @@ public class TelaGerenciarAnuncio extends HttpServlet {
         String erro = "";
         DalAnuncio ctr = new DalAnuncio();
         erro = "ok";
-        int cod;
+        int id;
         try {
-            cod = Integer.parseInt(request.getParameter("cod"));
+            id = Integer.parseInt(request.getParameter("id"));
         } catch (Exception e) {
-            cod = 0;
+            id = 0;
         }
         switch (acao.toLowerCase()) {
-            case "consultar":
-                String filtro = request.getParameter("filtro");
-                if (!filtro.isEmpty()) {
-                    filtro = "upper(titulo) like '%" + filtro.toUpperCase() + "%'";
-                }
-                response.getWriter().print(buscaAnuncio(filtro));
+            case "alterar":
                 break;
             case "apagar":
-                if (!ctr.apagar(cod)) {
+                if (!ctr.apagar(id)) {
                     erro = "Erro ao apagar o anuncio";
                 }
                 response.getWriter().print(erro);

@@ -61,6 +61,27 @@ body{
     color: #fff;
 }
 
+.block-title {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.block-title a:hover, a:visited, a:link, a:active {
+    text-decoration:none;
+}
+
+.block-title p {
+    color: #353535;
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 0;
+    margin: 0;
+}
+
 @media (max-width: 768px){
     .block {
         width: calc(100%/2 - 20px);
