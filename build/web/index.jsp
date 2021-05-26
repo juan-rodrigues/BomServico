@@ -48,15 +48,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="cadastroAnuncio.jsp">Anuncie</a>
                     </li>
-                    <%if (logado == true) {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="alteraUsuario.jsp">Alterar dados</a>
-                    </li>
-                    <%}%>
-                    <%if (logado == true) {
+                    <%if (logado == true){
                             Usuario usuario = (Usuario) session.getAttribute("usuario");
-                            if (usuario.getNivel() == 2) {
-                    %>
+                            if(usuario.getNivel()==2){
+                        %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,19 +62,18 @@
                             <a class="dropdown-item" href="gerenciarAnuncios.jsp">Gerenciar Anuncios</a>
                         </div>
                     </li>
-                    <%}
-                        }%>
+                    <%}}%>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" name="dados" id="fdados" onsubmit="MostraAnuncios()">
-                    <input id="filtro" class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
                 </form>
-                <%if (logado == true) {%>
+                <%if (logado == true){%>
                 <a class="nav-link" onclick="Logout()" href=".">Sair</a>
-                <%}%>
-                <%if (logado == false) {%>
-                <a class="nav-link" href="login.jsp">Logar</a>
-                <%}%>
+                    <%}%>
+                <%if (logado == false){%>
+                    <a class="nav-link" href="login.jsp">Logar</a>
+                    <%}%>
             </div>
         </nav>
         <main>

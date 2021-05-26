@@ -10,13 +10,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    boolean logado = false;
+    boolean logado=false;
     Anuncio anun = new DalAnuncio().getAnuncio(Integer.parseInt(request.getParameter("id")));
-    if (session != null) {
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-        if (usuario != null) {
-            logado = true;
-        }
+    if (session!=null)
+    {
+        Usuario usuario=(Usuario)session.getAttribute("usuario");
+        if (usuario!=null)
+            logado=true;
     }
 %>
 <html lang="pt-br">
@@ -32,8 +32,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="js/sairController.js" type="text/javascript"></script>
-        <script src="js/anuncioController.js" type="text/javascript"></script>
 
         <title>Anuncio</title>
     </head>
@@ -61,15 +59,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="cadastroAnuncio.jsp">Anuncie</a>
                     </li>
-                    <%if (logado == true) {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="alteraUsuario.jsp">Alterar dados</a>
-                    </li>
-                    <%}%>
-                    <%if (logado == true) {
+                    <%if (logado == true){
                             Usuario usuario = (Usuario) session.getAttribute("usuario");
-                            if (usuario.getNivel() == 2) {
-                    %>
+                            if(usuario.getNivel()==2){
+                        %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -80,15 +73,14 @@
                             <a class="dropdown-item" href="gerenciarAnuncios.jsp">Gerenciar Anuncios</a>
                         </div>
                     </li>
-                    <%}
-                        }%>
+                    <%}}%>
                 </ul>
-                <%if (logado == true) {%>
+                <%if (logado == true){%>
                 <a class="nav-link" onclick="Logout()" href=".">Sair</a>
-                <%}%>
-                <%if (logado == false) {%>
-                <a class="nav-link" href="login.jsp">Logar</a>
-                <%}%>
+                    <%}%>
+                <%if (logado == false){%>
+                    <a class="nav-link" href="login.jsp">Logar</a>
+                    <%}%>
             </div>
         </nav>
         <div class="pd-wrap">
@@ -101,27 +93,27 @@
                         <div id="slider" class="owl-carousel product-slider espaco">
                             <div class="item">
                                 <img
-                                    src="imagens/<%out.println(anun.getImagen1());%>" />
+                                    src="imagens/bom-eletricista.jpg" />
                             </div>
                             <div class="item">
-                                <img src="imagens/<%out.println(anun.getImagen2());%>" />
+                                <img src="imagens/bom-eletricista.jpg" />
                             </div>
                             <div class="item">
                                 <img
-                                    src="imagens/<%out.println(anun.getImagen3());%>" />
+                                    src="imagens/bom-eletricista.jpg" />
                             </div>
                         </div>
                         <div id="thumb" class="owl-carousel product-thumb">
                             <div class="item">
                                 <img
-                                    src="imagens/<%out.println(anun.getImagen1());%>" />
+                                    src="imagens/bom-eletricista.jpg" />
                             </div>
                             <div class="item">
-                                <img src="imagens/<%out.println(anun.getImagen2());%>" />
+                                <img src="imagens/bom-eletricista.jpg" />
                             </div>
                             <div class="item">
                                 <img
-                                    src="imagens/<%out.println(anun.getImagen3());%>" />
+                                    src="imagens/bom-eletricista.jpg" />
                             </div>
                         </div>
                     </div>
@@ -130,7 +122,7 @@
                             <div class="product-info">
                                 <div class="product-name">Prestador:<%out.println(anun.getUsu().getNome());%></div>
 
-                                <div class="product-price-discount"><span><%out.println(anun.getPreco());%></span></div>
+                                <div class="product-price-discount"><span>39.00R$</span></div>
                             </div>
                             <p><%out.println(anun.getBreveDescri());%></p>
                             <div class="row">
@@ -191,14 +183,6 @@
                         </div>
                     </div>
                 </div>
-                <%if (logado) {
-                        Usuario usuario = (Usuario) session.getAttribute("usuario");
-                        if (usuario.getId() == anun.getUsu().getId()) {
-                %>
-                <button type="button" onclick="Alterar(<%out.println(anun.getId());%>)" class="btn btn-warning btn_alterar">Editar</button>
-                <button type="button" onclick="Deletar(<%out.println(anun.getId());%>)" class="btn btn-danger btn_deletar">Deletar</button>
-                <%}
-                    }%>
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
