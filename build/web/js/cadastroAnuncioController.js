@@ -21,13 +21,14 @@ function GravaAnuncio()
     event.preventDefault(); // evita refresh da tela
 
     const URL_TO_FETCH = 'TelaCadastrarAnuncio';
-    
-    const data = new URLSearchParams();
+    var formData = new FormData(document.getElementById("fdados"));
+    formData.append('acao', 'confirmar');
+    /*const data = new URLSearchParams();
     for (const pair of new FormData(document.getElementById('fdados'))) {
         data.append(pair[0], pair[1]);
     }
-    data.append('acao', 'confirmar');
-    fetch(URL_TO_FETCH, { method: 'post', body: data 
+    data.append('acao', 'confirmar');*/
+    fetch(URL_TO_FETCH, { method: 'post', body: formData 
     }).then(function (response) {
         return response.text();
     }).then(function (retorno) {
