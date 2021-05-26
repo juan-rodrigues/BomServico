@@ -8,22 +8,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    boolean logado = false;
-    if (session != null) {
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-        if (usuario != null) {
-            logado=true;
-            if (usuario.getNivel() != 2) {
+    if (session!=null)
+    {
+        Usuario usuario=(Usuario)session.getAttribute("usuario");
+        if (usuario!=null){
+            if(usuario.getNivel()!=2)
                 response.sendRedirect("index.jsp");
-            }
-        } else {
-            response.sendRedirect("index.jsp");
         }
+        else
+            response.sendRedirect("index.jsp");
     }
-    if (!logado) {
-        response.sendRedirect(".");
-    }
-
+    
 %>
 <html lang="en">
     <head>
@@ -55,11 +50,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="cadastroAnuncio.jsp">Anuncie</a>
                     </li>
-                    <%if (logado == true) {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="alteraUsuario.jsp">Alterar dados</a>
-                    </li>
-                    <%}%>
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

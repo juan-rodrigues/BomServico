@@ -58,7 +58,7 @@ public class TelaGerenciarAnuncio extends HttpServlet {
                 break;
             case "apagar":
                 if (!ctr.apagar(cod)) {
-                    erro = "Erro ao apagar o anuncio";
+                    erro = "Erro ao apagar o pais";
                 }
                 response.getWriter().print(erro);
                 break;

@@ -17,15 +17,10 @@ public class TelaHome extends HttpServlet {
         String res = "";
         ArrayList<Anuncio> anuncios = new DalAnuncio().getAnuncioList(filtro);
         for (Anuncio anun : anuncios) {
-            res += String.format("<div class='block'> <div class='block-img'>"
-                    + "<a href='anuncio.jsp?id=%d'><img src='imagens/%s' "
-            + "alt='foto1'></a>"
-                    + "</div>"
-                    + "<div class='block-title'>" 
-                    +"<a href='anuncio.jsp?id=%d'><p>%s</p></a></div>" 
-                    + "<div class='block-desc'>%s"
+            res += String.format("<div class='block'> <div class='block-img'> <img src='imagens/bom-eletricista.jpg' "
+            + "alt='HTML5'></div><div class='block-desc'>%s"
                     + "</div><div class='block-link'>"
-                    + "<a href='anuncio.jsp?id=%d'>Ver mais</a></div></div>",anun.getId(),anun.getImagen1(),anun.getId(),anun.getTitulo(),anun.getBreveDescri(),anun.getId());
+                    + "<a href='anuncio.jsp?id=%d'>Ver mais</a></div></div>",anun.getBreveDescri(),anun.getId());
         }
 
         return res;
@@ -36,9 +31,9 @@ public class TelaHome extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String filtro = request.getParameter("filtro");
-                if (!filtro.isEmpty()) {
-                    filtro = "upper(titulo) like '%" + filtro.toUpperCase() + "%'";
-                }
+        if (!filtro.isEmpty()) {
+            filtro = "upper(nome) like '%" + filtro.toUpperCase() + "%'";
+        }
         response.getWriter().print(buscaAnuncios(filtro));
 
     }
