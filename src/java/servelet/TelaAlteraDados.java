@@ -1,45 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servelet;
 
-import dal.DalAnuncio;
+import dal.DalUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Anuncio;
+import javax.servlet.http.HttpSession;
+import models.Usuario;
 
-@WebServlet(name = "TelaHome", urlPatterns = {"/TelaHome"})
-public class TelaHome extends HttpServlet {
-    public String buscaAnuncios(String filtro) {
-        String res = "";
-        ArrayList<Anuncio> anuncios = new DalAnuncio().getAnuncioList(filtro);
-        for (Anuncio anun : anuncios) {
-            res += String.format("<div class='block'> <div class='block-img'>"
-                    + "<a href='anuncio.jsp?id=%d'><img src='imagens/%s' "
-            + "alt='foto1'></a>"
-                    + "</div>"
-                    + "<div class='block-title'>" 
-                    +"<a href='anuncio.jsp?id=%d'><p>%s</p></a></div>" 
-                    + "<div class='block-desc'>%s"
-                    + "</div><div class='block-link'>"
-                    + "<a href='anuncio.jsp?id=%d'>Ver mais</a></div></div>",anun.getId(),anun.getImagen1(),anun.getId(),anun.getTitulo(),anun.getBreveDescri(),anun.getId());
-        }
-
-        return res;
-    }
+/**
+ *
+ * @author pedro
+ */
+@WebServlet(name = "TelaAlteraDados", urlPatterns = {"/TelaAlteraDados"})
+public class TelaAlteraDados extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String erro = "";
 
-        String filtro = request.getParameter("filtro");
-                if (!filtro.isEmpty()) {
-                    filtro = "upper(titulo) like '%" + filtro.toUpperCase() + "%'";
-                }
-        response.getWriter().print(buscaAnuncios(filtro));
+        DalUsuario ctr = new DalUsuario();
+        erro = "ok";
+        int cod = Integer.parseInt(request.getParameter("codigo"));
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String telefone = request.getParameter("telefone");
+        String CEP = request.getParameter("CEP");
+        String estado = request.getParameter("estado");
+        String cidade = request.getParameter("cidade");
+        String endereco = request.getParameter("endereco");
+        String numero = request.getParameter("numero");
+        String complemento = request.getParameter("complemento");
+        String CPF = request.getParameter("CPF");
+        String senha = request.getParameter("senha");
+        String nivel = request.getParameter("nivel");
+        Usuario usu = new Usuario(cod, nome, email, telefone, CEP, estado,
+                cidade, endereco, numero, complemento, CPF, senha, Integer.parseInt(nivel));
+        if (!ctr.alterar(usu)) {
+            erro = "Erro ao criar conta";
+        }else {
+            request.getSession().invalidate();
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("usuario", usu);
+            
+            //inciar sessão
+        }
+
+        response.getWriter().print(erro);
 
     }
 

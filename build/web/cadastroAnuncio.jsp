@@ -50,6 +50,10 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="cadastroAnuncio.jsp">Anuncie</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="alteraUsuario.jsp">Alterar dados</a>
+                    </li>
+                    
                     <%if (logado == true){
                             Usuario usuario = (Usuario) session.getAttribute("usuario");
                             if(usuario.getNivel()==2){
@@ -76,7 +80,7 @@
             <h1 class="well">Novo Anuncio</h1>
             <div class="col-lg-12 well">
                 <div class="row">
-                    <form name="dados" id="fdados" onsubmit="GravaAnuncio()" enctype="multipart/form-data">
+                    <form name="dados"  method="POST" id="fdados" onsubmit="GravaAnuncio()" enctype="multipart/form-data">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Título</label>

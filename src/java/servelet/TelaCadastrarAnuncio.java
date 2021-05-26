@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,13 @@ import javax.servlet.http.Part;
 import models.Anuncio;
 import models.Categoria;
 import models.Usuario;
+
+@MultipartConfig(
+    location="/",
+    fileSizeThreshold=1024*1024,    // 1MB *      
+    maxFileSize=1024*1024*100,      // 100MB **
+    maxRequestSize=1024*1024*10*10  // 100MB ***
+)
 
 @WebServlet(name = "TelaCadastrarAnuncio", urlPatterns = {"/TelaCadastrarAnuncio"})
 public class TelaCadastrarAnuncio extends HttpServlet {
@@ -67,14 +75,14 @@ public class TelaCadastrarAnuncio extends HttpServlet {
                 String imagem1name = foto1.getSubmittedFileName();
                 String imagem2name = foto2.getSubmittedFileName();
                 String imagem3name = foto3.getSubmittedFileName();
-                FileOutputStream arquivo1 = new FileOutputStream(new File(getServletContext().getRealPath("/") + "/" + foto1.getSubmittedFileName()));
+                FileOutputStream arquivo1 = new FileOutputStream(new File(getServletContext().getRealPath("/") + "imagens/" + foto1.getSubmittedFileName()));
                 arquivo1.write(imagem1);
                 arquivo1.close();
-                FileOutputStream arquivo2 = new FileOutputStream(new File(getServletContext().getRealPath("/") + "/" + foto2.getSubmittedFileName()));
-                arquivo2.write(imagem1);
+                FileOutputStream arquivo2 = new FileOutputStream(new File(getServletContext().getRealPath("/") + "imagens/" + foto2.getSubmittedFileName()));
+                arquivo2.write(imagem2);
                 arquivo2.close();
-                FileOutputStream arquivo3 = new FileOutputStream(new File(getServletContext().getRealPath("/") + "/" + foto3.getSubmittedFileName()));
-                arquivo3.write(imagem1);
+                FileOutputStream arquivo3 = new FileOutputStream(new File(getServletContext().getRealPath("/") + "imagens/" + foto3.getSubmittedFileName()));
+                arquivo3.write(imagem3);
                 arquivo3.close();
 
                 
