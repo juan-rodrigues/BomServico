@@ -30,6 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/cadastroUsuarioController.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <title>Criar Conta</title>
 </head>
 
@@ -69,19 +70,19 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="CPF" class="form-control" placeholder="CPF" type="text" required>
+                    <input name="CPF" class="form-control" placeholder="CPF" type="text" onkeypress="$(this).mask('000.000.000-00');" required>
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="telefone" class="form-control" placeholder="Telefone" type="tel" required>
+                    <input name="telefone" class="form-control" placeholder="Telefone" onkeypress="$(this).mask('(00) 00000-0000');" type="tel" required>
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="CEP" class="form-control" placeholder="CEP" type="text" required>
+                    <input name="CEP" class="form-control" placeholder="CEP" onkeypress="$(this).mask('00000-000');" type="text" required>
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
